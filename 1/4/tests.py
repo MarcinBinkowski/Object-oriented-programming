@@ -1,5 +1,6 @@
 from main import encode, decode
 
+
 print(encode('avasd asdas'))
 print(decode(".- ...- .- ... -..  .- ... -.. .- ..."))
 

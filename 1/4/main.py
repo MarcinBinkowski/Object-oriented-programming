@@ -12,7 +12,9 @@ CODE = {'A': '.-', 'B': '-...', 'C': '-.-.',
         '6': '-....', '7': '--...', '8': '---..',
         '9': '----.'
         }
+
 CODE_REVERT = dict((v, k) for k, v in CODE.items())
+
 
 def decode(morse_code):
     decoded_text = ""
@@ -24,14 +26,18 @@ def decode(morse_code):
         decoded_text += " "
     return decoded_text[:len(decoded_text)-1]
 
+
 def split_text(morse_code):
     return morse_code.split("  ")
+
 
 def split_word(word):
     return word.split(" ")
 
+
 def decode_letter(letter):
     return CODE_REVERT[letter]
+
 
 def encode(text):
     morse_code = ""
