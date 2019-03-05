@@ -17,7 +17,7 @@ namespace ConsoleApp1
             Console.ReadLine();
         }
     }
-    public class IntStream
+    class IntStream
     {
         protected int nextNumber = -1;
 
@@ -46,7 +46,7 @@ namespace ConsoleApp1
         }
     }
 
-    public class PrimeStream : IntStream
+    class PrimeStream : IntStream
     {
         private bool IsPrime(int number)
         {
@@ -72,7 +72,7 @@ namespace ConsoleApp1
         }
     }
 
-    public class RandomStream : IntStream
+    class RandomStream : IntStream
     {
         Random randomNumber = new Random();
 
@@ -82,7 +82,7 @@ namespace ConsoleApp1
         }
     }
 
-    public class RandomWordStream : PrimeStream
+    class RandomWordStream : PrimeStream
     {
         private static string chars = "$%#@!*abcdefghijklmnopqrstuvwxyz1234567890?;:ABCDEFGHIJKLMNOPQRSTUVWXYZ^&";
         RandomStream randInt = new RandomStream();

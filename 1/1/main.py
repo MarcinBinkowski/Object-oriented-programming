@@ -8,7 +8,7 @@ def lcm(a, b):
     lcm = (a * b) // gcd(a, b)
     return lcm
 
-
+    
 def reduce(fraction):
     a = gcd(fraction[0], fraction[1])
     fraction[0] = int(fraction[0] / a)
