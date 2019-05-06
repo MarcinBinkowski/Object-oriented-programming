@@ -89,9 +89,7 @@ namespace ConsoleApp1
 
         public bool IsEmpty()
         {
-            if (size == 0)
-                return true;
-            return false;
+            return size == 0;
         }
         public void AddFirst(T newValue)
         {
