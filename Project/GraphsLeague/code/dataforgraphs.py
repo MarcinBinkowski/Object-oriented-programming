@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import constants
+from constants import Constants
 import modifydata
 
 from loldata import NewUser
@@ -35,8 +35,8 @@ class GraphData:
         """
         This method returnes name of champion with given id
         """
-        for name in constants.all_about_champions_json["data"]:
-            if constants.all_about_champions_json["data"][name]["key"] == id_number:
+        for name in Constants.all_about_champions_json["data"]:
+            if Constants.all_about_champions_json["data"][name]["key"] == id_number:
                 return name
 
     def get_champions_names(self, ids_list):
