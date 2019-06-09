@@ -19,9 +19,11 @@ class Generator:
     def __init__(self, name, server):
 
 
-        if (self.make_instance_of_summoner(name, server) == 0):
-            return None
+        self.name = name
         self.server = server
+        print(self.server)
+        if (self.make_instance_of_summoner() == 0):
+            return None
         self.lvl = self.summoner.lvl
         self.league_solo_duo = modifydata.get_leagues(self.summoner)[0][0].lower()
         self.league_flex = modifydata.get_leagues(self.summoner)[1][0].lower()
@@ -45,10 +47,11 @@ class Generator:
         print("Autor Marcin Binkowski, https://www.github.com/marcinbinkowski")
         print("**************************")
 
-    def make_instance_of_summoner(self, name, server):
+    def make_instance_of_summoner(self):
         try:
-            self.summoner = NewUser(self.nick, self.server)
-        except:
+            self.summoner = NewUser(self.name, self.server)
+        except Exception as e:
+            print(e)
             return 0
 
 
@@ -67,7 +70,7 @@ class Generator:
         p = plt.gcf()
         p.gca().add_artist(my_circle)
         plt.title("Top champions", fontsize=30, weight="bold")
-        plt.savefig('../src/temporary/{}_mastery_distribution.png'.format(self.graph_data.summoner.summoner),
+        plt.savefig('C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/{}_mastery_distribution.png'.format(self.graph_data.summoner.summoner),
                     transparent=True)
         plt.clf()
 
@@ -90,7 +93,7 @@ class Generator:
         p.gca().add_artist(my_circle)
         plt.title("solo/duo wins", fontsize=30, weight="bold")
         plt.text(0, 0, f"{self.graph_data.win_data[0][2]*100}%", fontsize=12, ha="center", va="center", size=24)
-        plt.savefig('../src/temporary/{}_solo_duo.png'.format(self.graph_data.summoner.summoner), transparent=True)
+        plt.savefig('C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/{}_solo_duo.png'.format(self.graph_data.summoner.summoner), transparent=True)
         plt.clf()
 
     def flex_win_ratio_graph(self):
@@ -112,7 +115,7 @@ class Generator:
         p.gca().add_artist(my_circle)
         plt.title("flex wins", fontsize=30, weight="bold")
         plt.text(0, 0, f"{self.graph_data.win_data[1][2]*100}%", fontsize=12, ha="center", va="center", size=24)
-        plt.savefig('../src/temporary/{}_flex.png'.format(self.graph_data.summoner.summoner), transparent=True)
+        plt.savefig('C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/{}_flex.png'.format(self.graph_data.summoner.summoner), transparent=True)
         plt.clf()
 
     def blank_graph(self):
@@ -124,7 +127,7 @@ class Generator:
         p = plt.gcf()
         p.gca().add_artist(my_circle)
         plt.title("You need to play more games", fontsize=18, weight="bold")
-        plt.savefig('../src/temporary/blank_graph.png', transparent=True)
+        plt.savefig('C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/blank_graph.png', transparent=True)
         plt.clf()
 
     def download_icons(self, icon_id, top_champs):
@@ -133,21 +136,21 @@ class Generator:
         """
         icon = requests.get("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/{}.png".format(icon_id))
         if icon.status_code == 200:
-            with open("../src/temporary/icon.png", 'wb') as f:
+            with open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/icon.png", 'wb') as f:
                 f.write(icon.content)
             f.close()
         else:
             print("Profile icon not in data base...") # in case sth goes wrong we get poro icon
             icon = requests.get("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png")
             if icon.status_code == 200:
-                with open("../src/temporary/icon.png", 'wb') as f:
+                with open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/icon.png", 'wb') as f:
                     f.write(icon.content)
                 f.close()
 
         for i in range(3):
             icon = requests.get(Constants.urls["icons"].format(top_champs[i]))
             if icon.status_code == 200:
-                with open("../src/temporary/top_champ{}.png".format(i + 1), 'wb') as f:
+                with open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/top_champ{}.png".format(i + 1), 'wb') as f:
                     f.write(icon.content)
                 f.close()
             else:
@@ -158,7 +161,7 @@ class Generator:
         """
         Method removing icons and graphs from src/temporary directorry
         """
-        folder = '../src/temporary'
+        folder = 'C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary'
         for the_file in os.listdir(folder):
             file_path = os.path.join(folder, the_file)
             try:
@@ -168,7 +171,7 @@ class Generator:
                 print(e)
 
 
-name = open("temporary/name.txt","r").read()
-server = open("temporary/server.txt","r").read()
+name = open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/name.txt", "r").read()
+server = open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/server.txt","r").read()
 print(name,server)
-#generator = Generator(name, server)
+generator = Generator(name, server)
