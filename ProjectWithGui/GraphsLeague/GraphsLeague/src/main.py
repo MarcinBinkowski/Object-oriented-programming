@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
-import modifydata
+from datamodifier import DataModifier
 import requests
 import os
 from loldata import NewUser
-from raportgenerator import generate_raport
+from raportgenerator import PDFGenerator
 from constants import Constants
 import dataforgraphs
 import ctypes
 
 
 
-class Generator:
+class MainGenerator:
     """
     Class used to coordinate different functions from different files
     """
@@ -21,12 +21,14 @@ class Generator:
 
         self.name = name
         self.server = server
+        self.summoner = None
         print(self.server)
         if (self.make_instance_of_summoner() == 0):
             return None
         self.lvl = self.summoner.lvl
-        self.league_solo_duo = modifydata.get_leagues(self.summoner)[0][0].lower()
-        self.league_flex = modifydata.get_leagues(self.summoner)[1][0].lower()
+        self.dataModyfier = DataModifier(self.summoner)
+        self.league_solo_duo = DataModifier.get_leagues(self.summoner)[0][0].lower()
+        self.league_flex = DataModifier.get_leagues(self.summoner)[1][0].lower()
         self.graph_data = dataforgraphs.GraphData(self.summoner)
         self.best_three_names = self.graph_data.best_names[:3]
         self.champs_with_chest = self.graph_data.best_with_chests_names
@@ -37,7 +39,7 @@ class Generator:
         self.flex_win_ratio_graph()
 
         # generating raport
-        generate_raport(self.summoner.summoner, self.league_solo_duo,self.league_flex,
+        PdfGenerator.generate_raport(self.summoner.summoner, self.league_solo_duo,self.league_flex,
                         self.server, self.lvl, self.champs_with_chest)
 
         self.remove_folder()
@@ -174,4 +176,4 @@ class Generator:
 name = open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/name.txt", "r").read()
 server = open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/server.txt","r").read()
 print(name,server)
-generator = Generator(name, server)
+generator = MainGenerator(name, server)
