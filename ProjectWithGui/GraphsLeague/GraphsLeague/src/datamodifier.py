@@ -74,13 +74,12 @@ class DataModifier:
         return to_return
 
     def get_leagues(self):
-        league_info = self.summoner.league_info
         try:
-            solo_duo_league = (league_info[0]["tier"], league_info[0]["rank"])
+            solo_duo_league = (self.summoner.league_info[0]["tier"], self.summoner.league_info[0]["rank"])
         except:
             solo_duo_league = "p"
         try:
-            flex_league = (league_info[1]["tier"], league_info[1]["rank"])
+            flex_league = (self.summoner.league_info[1]["tier"], self.summoner.league_info[1]["rank"])
         except:
             flex_league = "p"
         return solo_duo_league, flex_league

@@ -4,7 +4,7 @@ import requests
 
 class Constants:
     """Class used to store all constats used to create reports"""
-    api_key = "RGAPI-7cc33ace-2e0c-46dc-b47f-c89239f21178"
+    api_key = "RGAPI-5d94c520-e62f-41df-ad45-efeae525d27a"
 
     urls = {
         "summoner_id": "https://{}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{}?api_key={}",

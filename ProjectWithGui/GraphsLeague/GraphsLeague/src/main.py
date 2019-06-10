@@ -5,7 +5,7 @@ from datamodifier import DataModifier
 import requests
 import os
 from loldata import NewUser
-from raportgenerator import generate_raport
+from raportgenerator import PdfGenerator
 from constants import Constants
 import dataforgraphs
 import ctypes
@@ -36,7 +36,7 @@ class MainGenerator:
         self.solo_win_ratio_graph()
         self.flex_win_ratio_graph()
         # generating raport
-        generate_raport(self.summoner.summoner, self.league_solo_duo, self.league_flex,
+        PdfGenerator.generate_raport(self.summoner.summoner, self.league_solo_duo, self.league_flex,
                         self.server, self.lvl, self.champs_with_chest)
 
         self.remove_folder()
@@ -50,7 +50,7 @@ class MainGenerator:
         try:
             self.summoner = NewUser(self.name, self.server)
         except Exception as e:
-            print(e)
+            print("exception: ", e)
             return 0
 
 
@@ -168,7 +168,6 @@ class MainGenerator:
                     os.unlink(file_path)
             except Exception as e:
                 print(e)
-
 
 name = open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/name.txt", "r").read()
 server = open("C:/Users/marci/OneDrive/Pulpit/dev/Object-oriented-programming/ProjectWithGui/GraphsLeague/GraphsLeague/src/temporary/server.txt","r").read()

@@ -41,3 +41,4 @@ class NewUser:
         """ Get info about all champions json"""
         return requests.get(Constants.urls["champions"].format(
                             self.region, self.ID, self.api_key)).json()
+
