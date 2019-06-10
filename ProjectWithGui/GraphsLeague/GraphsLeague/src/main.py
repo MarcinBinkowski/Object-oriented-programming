@@ -5,7 +5,7 @@ from datamodifier import DataModifier
 import requests
 import os
 from loldata import NewUser
-from raportgenerator import PDFGenerator
+from raportgenerator import generate_raport
 from constants import Constants
 import dataforgraphs
 import ctypes
@@ -17,8 +17,6 @@ class MainGenerator:
     Class used to coordinate different functions from different files
     """
     def __init__(self, name, server):
-
-
         self.name = name
         self.server = server
         self.summoner = None
@@ -37,9 +35,8 @@ class MainGenerator:
         self.champions_distribiution_graph()
         self.solo_win_ratio_graph()
         self.flex_win_ratio_graph()
-
         # generating raport
-        PdfGenerator.generate_raport(self.summoner.summoner, self.league_solo_duo,self.league_flex,
+        generate_raport(self.summoner.summoner, self.league_solo_duo, self.league_flex,
                         self.server, self.lvl, self.champs_with_chest)
 
         self.remove_folder()
